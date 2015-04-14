@@ -68,34 +68,66 @@ class BinarySearchTree : public Drawable
 template < class T >
 int BinarySearchTree<T>::getHeight()
 {
-   //DO THIS
-
+    return getHeight(root);
 }
 
 template < class T >
 int BinarySearchTree<T>::getHeight(TreeNode<T>* tNode)
 {
-   //DO THIS
+    if(tNode == NULL)
+    {
+        return 0;
+    }
 
+    int left = getHeight(tNode->getLeft());
+    int right = getHeight(tNode->getRight());
 
-
+    if(left > right)
+    {
+        return left + 1;
+    }
+    else
+    {
+        return right + 1;
+    }
 }
 
 template < class T >
 bool BinarySearchTree<T>::isBalanced()
 {
-   //DO THIS
-
+    return isBalanced(root);
 }
 
 template < class T >
 bool BinarySearchTree<T>::isBalanced(TreeNode<T>* tNode)
 {
-   //DO THIS
+    if(tNode == NULL)
+    {
+        return true;
+    }
+    else
+    {
+        if(!isBalanced(tNode->getRight()))
+        {
+            return false;
+        }
+        else if(!isBalanced(tNode->getLeft()))
+        {
+            return false;
+        }
 
+        int left = getHeight(tNode->getLeft());
+        int right = getHeight(tNode->getRight());
 
+        int height = abs(left - right);
 
+        if(height > 1)
+        {
+            return false;
+        }
+    }
 
+    return true;
 }
 
 template < class T >
@@ -173,7 +205,7 @@ void BinarySearchTree<T>::minimizeComplete(T** items, int first, int last)
          double int_k_right =
 
          //keep searching for spot where the number of elements to the left of mid is 2^k - 1 (a full tree)
-         //which means the number of elements to the left of mid including mid is 2^k 
+         //which means the number of elements to the left of mid including mid is 2^k
          //or the number of elements to the right of mid is 2^k
          //compare the direct log computation and the computation cast to an int
          //to determine if the direct computation is an int
@@ -211,7 +243,7 @@ template < class T >
 TreeNode<T>* BinarySearchTree<T>::removeItem(TreeNode<T>* tNode, String* sk)
 {
    if (tNode == NULL)
-   { 
+   {
       return tNode;  //take no action, item not present
    }
 
@@ -257,7 +289,7 @@ TreeNode<T>* BinarySearchTree<T>::removeNode(TreeNode<T>* tNode)
       delete tNode;
       return temp;
    }
-   else 
+   else
    {
       T* replace = findLeftMost(tNode->getRight());
       tNode->setItem(replace);
@@ -351,7 +383,7 @@ TreeNode<T>* BinarySearchTree<T>::getRootNode()
 
 template < class T >
 void BinarySearchTree<T>::setRootNode(TreeNode<T>* tNode)
-{  
+{
    root = tNode;
 }
 
@@ -401,7 +433,7 @@ TreeNode<T>* BinarySearchTree<T>::insertItem(TreeNode<T>* tNode, T* item)
 {
    TreeNode<T>* subtree;
    if (tNode == NULL)
-   { 
+   {
       sze++;
       return new TreeNode<T>(item);
    }
@@ -424,7 +456,7 @@ TreeNode<T>* BinarySearchTree<T>::insertItem(TreeNode<T>* tNode, T* item)
       subtree = insertItem(tNode->getRight(), item);
       tNode->setRight(subtree);
    }
-   
+
    return tNode;
 }
 
