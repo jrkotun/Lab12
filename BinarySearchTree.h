@@ -135,22 +135,25 @@ BinarySearchTree<T>* BinarySearchTree<T>::minimize()
 {
    T** items = toArray();
    BinarySearchTree<T>* bst = new BinarySearchTree<T>(compare_items, compare_keys);
-   //DO THIS
 
-
-
-
+   T** minArray = toArray();
+   bst->minimize(minArray, 0, sze-1);
 }
 
 template < class T >
 void BinarySearchTree<T>::minimize(T** items, int first, int last)
 {
-   //DO THIS (recursive minimize method)
+    if(first > last)
+    {
+        return;
+    }
 
+    int mid = (first + last) / 2;
 
+    insert(items[mid]);
 
-
-
+    minimize(items, first, mid - 1); //left
+    minimize(items, mid + 1, last); //right
 }
 
 template < class T >
