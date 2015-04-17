@@ -47,7 +47,7 @@ int main()
    while(bst_iter->hasNext())
    {
       CD* cd = bst_iter->next();
-      cd->displayCD();
+      //cd->displayCD();
    }
    delete bst_iter;
 
@@ -56,11 +56,11 @@ int main()
 
    if(balance == true)
    {
-       cout << "The height is " << height << " and it is balanced.";
+       cout << "\nThe height is " << height << " and it is balanced.\n";
    }
    else
    {
-       cout << "The height is " << height << " and it is not balanced.";
+       cout << "\nThe height is " << height << " and it is not balanced.\n";
    }
 
    //create a minimum height binary search tree
@@ -72,7 +72,7 @@ int main()
    while(bst_iter->hasNext())
    {
       CD* cd = bst_iter->next();
-      cd->displayCD();
+      //cd->displayCD();
    }
    delete bst_iter;
 
@@ -81,24 +81,24 @@ int main()
 
    if(balance == true)
    {
-       cout << "The minimum height is " << height << " and it is balanced.";
+       cout << "\nThe minimum height is " << height << " and it is balanced.\n";
    }
    else
    {
-       cout << "The minimum height is " << height << " and it is not balanced.";
+       cout << "\nThe minimum height is " << height << " and it is not balanced.\n";
    }
 
    //create a complete binary search tree
    BinarySearchTree<CD>* complete_bst = bst->minimizeComplete();
-   delete bst;
+   delete bst; cout << "I am still working at this point \n";
 
    //make sure that an inorder traversal gives sorted order
-   bst_iter = complete_bst->iterator();
-   bst_iter->setInorder();  //takes a snapshot of the data
+   bst_iter = complete_bst->iterator();										// <- this crashes
+   bst_iter->setInorder(); //takes a snapshot of the data
    while(bst_iter->hasNext())
    {
       CD* cd = bst_iter->next();
-      cd->displayCD();
+      //cd->displayCD();
    }
    delete bst_iter;
 
@@ -107,11 +107,11 @@ int main()
 
    if(balance == true)
    {
-       cout << "The minimum height is " << height << " and it is balanced.";
+       cout << "\nThe minimum height is " << height << " and it is balanced.\n";
    }
    else
    {
-       cout << "The minimum height is " << height << " and it is not balanced.";
+       cout << "\nThe minimum height is " << height << " and it is not balanced.\n";
    }
 
    delete complete_bst;

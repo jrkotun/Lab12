@@ -138,6 +138,7 @@ BinarySearchTree<T>* BinarySearchTree<T>::minimize()
 
    T** minArray = toArray();
    bst->minimize(minArray, 0, sze-1);
+   return bst;
 }
 
 template < class T >
@@ -180,7 +181,9 @@ BinarySearchTree<T>* BinarySearchTree<T>::minimizeComplete()
    T** items = toArray();
    BinarySearchTree<T>* bst = new BinarySearchTree<T>(compare_items, compare_keys);
    //DO THIS
-
+	
+	bst->minimizeComplete(items,0,sze-1);
+	return bst;
 
 }
 
@@ -202,10 +205,10 @@ void BinarySearchTree<T>::minimizeComplete(T** items, int first, int last)
       if (first < last)
       {
          //initial log computations using mid
-         double k_left =                    //log base 2 of the number of items to the left of mid (including mid)
-         double int_k_left =                //same as above but rounded
-         double k_right =
-         double int_k_right =
+         double k_left =          log(first+mid)*log_factor;        //log base 2 of the number of items to the left of mid (including mid)
+         double int_k_left =      (int) (k_left + 0.5);          //same as above but rounded
+         double k_right =			log(mid+last)*log_factor;
+         double int_k_right =		(int) (k_right + 0.5);
 
          //keep searching for spot where the number of elements to the left of mid is 2^k - 1 (a full tree)
          //which means the number of elements to the left of mid including mid is 2^k
@@ -217,7 +220,12 @@ void BinarySearchTree<T>::minimizeComplete(T** items, int first, int last)
             mid++;
             //DO THIS
             //try again with mid shifted one to the right
-
+			
+			//minimizeComplete(items,mid+1,sze-1);
+		 k_left =          log(first+mid)*log_factor;        //log base 2 of the number of items to the left of mid (including mid)
+         int_k_left =      (int) (k_left + 0.5);          //same as above but rounded
+         k_right =			log(mid+last)*log_factor;
+         int_k_right =		(int) (k_right + 0.5);
 
 
 
@@ -229,7 +237,10 @@ void BinarySearchTree<T>::minimizeComplete(T** items, int first, int last)
       //found the next item to insert into the tree
       //get it, insert it, and make two recursive calls
 
+	    insert(items[mid]);
 
+		minimizeComplete(items, first, mid - 1); //left
+		minimizeComplete(items, mid + 1, last); //right
 
 
 
