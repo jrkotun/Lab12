@@ -90,10 +90,10 @@ int main()
 
    //create a complete binary search tree
    BinarySearchTree<CD>* complete_bst = bst->minimizeComplete();
-   delete bst; cout << "I am still working at this point \n";
+   delete bst;
 
    //make sure that an inorder traversal gives sorted order
-   bst_iter = complete_bst->iterator();										// <- this crashes
+   bst_iter = complete_bst->iterator();										
    bst_iter->setInorder(); //takes a snapshot of the data
    while(bst_iter->hasNext())
    {

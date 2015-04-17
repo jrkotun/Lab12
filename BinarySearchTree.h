@@ -6,6 +6,10 @@
 #include "Text.h"
 #include "Line.h"
 #include "Drawable.h"
+
+#include<iostream>
+using namespace std;
+
 using CSC2110::String;
 
 template < class T >
@@ -182,7 +186,8 @@ BinarySearchTree<T>* BinarySearchTree<T>::minimizeComplete()
    BinarySearchTree<T>* bst = new BinarySearchTree<T>(compare_items, compare_keys);
    //DO THIS
 	
-	bst->minimizeComplete(items,0,sze-1);
+	T** minArray = toArray();
+	bst->minimizeComplete(minArray,0,sze-1);
 	return bst;
 
 }
@@ -205,9 +210,9 @@ void BinarySearchTree<T>::minimizeComplete(T** items, int first, int last)
       if (first < last)
       {
          //initial log computations using mid
-         double k_left =          log(first+mid)*log_factor;        //log base 2 of the number of items to the left of mid (including mid)
+         double k_left =          log(mid-first+1)*log_factor;        //log base 2 of the number of items to the left of mid (including mid)
          double int_k_left =      (int) (k_left + 0.5);          //same as above but rounded
-         double k_right =			log(mid+last)*log_factor;
+         double k_right =			log(last-mid+1)*log_factor;
          double int_k_right =		(int) (k_right + 0.5);
 
          //keep searching for spot where the number of elements to the left of mid is 2^k - 1 (a full tree)
@@ -221,10 +226,10 @@ void BinarySearchTree<T>::minimizeComplete(T** items, int first, int last)
             //DO THIS
             //try again with mid shifted one to the right
 			
-			//minimizeComplete(items,mid+1,sze-1);
-		 k_left =          log(first+mid)*log_factor;        //log base 2 of the number of items to the left of mid (including mid)
+			
+		 k_left =          log(mid-first+1)*log_factor;        //log base 2 of the number of items to the left of mid (including mid)
          int_k_left =      (int) (k_left + 0.5);          //same as above but rounded
-         k_right =			log(mid+last)*log_factor;
+         k_right =			log(last-mid+1)*log_factor;
          int_k_right =		(int) (k_right + 0.5);
 
 
